@@ -352,6 +352,7 @@
 ナカムラカイケイシ゛ムシヨ	税理士先生報酬	税理士工资	人员工资	要
 タケタ゛ツヨシセ゛イリシシ゛ムシヨ	税理士先生報酬	税理士工资	人员工资	要
 1164484　タニガワ　エイイチ	給料	人员工资	人员工资	不要
+1164484　タニカ゛ワ　エイイチ	給料	人员工资	人员工资	不要
 （カ）シ゛エ－シ－ヒ゛－	クレジットカード決済部分への返金	信用卡还款	办公支出	要
 ﾌﾘｺﾐﾃｽｳﾘﾖｳ	手数料	手续费	办公支出	要
 振込手数料	手数料	手续费	办公支出	要
@@ -377,6 +378,9 @@
 アマゾンジヤパンゴウドウガイシヤ	アマゾン売上3AM	amazon销售额进账3AM	销售额进账	要
 "ｱﾏｿﾞﾝｼﾞﾔﾊﾟﾝｺﾞｳﾄﾞｳｶﾞｲ
 ﾌﾘｺﾐ"	アマゾン売上2AM	amazon销售额进账2AM	销售额进账	要
+ﾌﾂｳﾖｷﾝ ﾘｿｸ	利息	利息	利息	不要
+ｴ-ﾕ-ｺﾏ-ｽｱﾝﾄﾞﾗｲﾌ	wowma売上入金	wowma销售额进账	销售额进账	要
+ﾍﾟｲｼﾞｴﾝﾄ ﾌﾘｺﾐ	wowma売上入金	wowma销售额进账	销售额进账	要
 </textarea>
   </div>
   <script>if (~location.search.indexOf('debug')) { document.getElementById('b').style.display = "block"; }; document.getElementById('a').select(); document.getElementById('J_Cal').addEventListener('click', function (ev) { const b = document.getElementById('b'); let map = []; b.value.trim().split('\n').forEach(item => { const s = '	'; const itemMap = item.trim().split(s); map.push({/*入出金先内容的 keyword*/keywords: itemMap[0] ? itemMap[0].trim().split(',') : [],/*属性*/type: itemMap[1] || '',/*备注（中文）*/type_cn: itemMap[2] || '',/*備考（日本語）*/group: itemMap[3] || '',/*凭证*/certificate: itemMap[4] || '' }); }); const a = document.getElementById('a'); const aMap = a.value.trim().split('\n'); const getType = function (name) { let item = { type: '#N/A', type_cn: '#N/A', group: '#N/A', certificate: '#N/A' }; map.forEach((m) => { m.keywords.forEach(e => { if (name.replace(/\s+/g, ' ').indexOf(e.replace(/\s+/g, ' ')) > -1) { item = m; } }) }); return item; }; const dataSource = aMap.map((item) => { const matched = getType(item); return { name: item, type: matched.type, type_cn: matched.type_cn, group: matched.group, certificate: matched.certificate } }); const columns = [{ title: '入出金先内容', dataIndex: 'name' }, { title: '備考', dataIndex: 'type', }, { title: '出入金内容（中文）', dataIndex: 'type_cn' }, { title: '属性', dataIndex: 'group' }, { title: '凭证', dataIndex: 'certificate' }]; JSONTOEXCEL.exportXLS(dataSource, columns, 'export.xls'); })</script>
