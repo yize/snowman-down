@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>银行出入金自动解析1</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>银行出入金自动解析</title>
   <style>
     @font-face {
       font-family: "Chinese Quote";
@@ -13,7 +13,7 @@
       unicode-range: U+2018, U+2019, U+201c, U+201d;
     }
 
-    body{
+    body {
       margin: 0;
       padding: 0;
     }
@@ -51,15 +51,15 @@
     }
 
     @font-face {
-      font-family: 'anticon';
+      font-family: "anticon";
       font-display: fallback;
-      src: url('https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.eot');
+      src: url("https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.eot");
       /* IE9*/
-      src: url('https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.woff') format('woff'),
-      /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-      url('https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.ttf') format('truetype'),
-      /* iOS 4.1- */
-      url('https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.svg#iconfont') format('svg');
+      src: url("https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.woff") format("woff"),
+        /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+        url("https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.ttf") format("truetype"),
+        /* iOS 4.1- */
+        url("https://at.alicdn.com/t/font_148784_v4ggb6wrjmkotj4i.svg#iconfont") format("svg");
     }
 
     .anticon {
@@ -84,7 +84,10 @@
     }
 
     .ant-input {
-      font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
       font-variant: tabular-nums;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
@@ -103,16 +106,16 @@
       background-image: none;
       border: 1px solid #d9d9d9;
       border-radius: 4px;
-      -webkit-transition: all .3s;
-      transition: all .3s;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
     }
 
     textarea.ant-input {
       max-width: 100%;
       height: auto;
       vertical-align: bottom;
-      -webkit-transition: all .3s, height 0s;
-      transition: all .3s, height 0s;
+      -webkit-transition: all 0.3s, height 0s;
+      transition: all 0.3s, height 0s;
       min-height: 32px;
     }
 
@@ -214,17 +217,20 @@
       right: -1px;
       background: #fff;
       opacity: 0.35;
-      content: '';
+      content: "";
       border-radius: inherit;
       z-index: 1;
-      -webkit-transition: opacity .2s;
-      transition: opacity .2s;
+      -webkit-transition: opacity 0.2s;
+      transition: opacity 0.2s;
       pointer-events: none;
       display: none;
     }
 
     .ant-alert {
-      font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+        "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
       font-size: 14px;
       font-variant: tabular-nums;
       line-height: 1.5;
@@ -294,18 +300,168 @@
       margin-bottom: 20px;
     }
   </style>
-  <script>/** @Author: changge* @Date: 2017-08-15 11:07:05* @Last Modified by: changge* @Last Modified time: 2018-01-22 17:49:31*/(function (global) { var JSONTOEXCEL = (function () { var jsonToXLS = (function () { var xlsTemp = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>${table}</table></body></html>'; return function (dataSource, columns) { var xlsData = "", values = []; xlsData += "<thead>"; columns.forEach(function (item) { xlsData += "<th>" + item.title + "</th>"; if (item.computed && typeof item.computed === "function") { values.push(item.computed) } else { if (item.dataIndex && typeof item.dataIndex === "string") { values.push(item.dataIndex) } else { values.push(null) } } }); xlsData += "</thead>"; xlsData += "<tbody>"; dataSource.forEach(function (item) { xlsData += "<tr>"; values.forEach(function (key) { xlsData += "<td>"; if (typeof key === "string") { xlsData += item[key] } else { if (typeof key === "function") { xlsData += key(item) || "" } else { xlsData += "" } } xlsData += "</td>" }); xlsData += "</tr>" }); xlsData += "</tbody>"; return xlsTemp.replace("${table}", xlsData) } })(); var jsonToCSV = function (dataSource, columns) { var csvData = "", values = []; columns.forEach(function (item) { if (item.computed && typeof item.computed === "function") { values.push(item.computed) } else { if (item.dataIndex && typeof item.dataIndex === "string") { values.push(item.dataIndex) } else { values.push(null) } } }); dataSource.forEach(function (item) { values.forEach(function (key) { if (typeof key === "string") { csvData += item[key] } else { if (typeof key === "function") { csvData += key(item) || "" } else { csvData += "" } } csvData += "," }); csvData = csvData.slice(0, csvData.length - 1); csvData += "\r\n" }); return csvData }; var base64 = function (s) { return window.btoa(window.unescape(encodeURIComponent(s))) }; var exportXLS = function (dataSource, columns, fileName) { var XLSData = "data:application/vnd.ms-excel;base64," + base64(jsonToXLS(dataSource, columns)); download(XLSData, fileName) }; var exportCSV = function (dataSource, columns, fileName) { var CSVData = "data:application/csv;base64," + base64(jsonToCSV(dataSource, columns)); download(CSVData, fileName) }; var download = function (base64data, fileName) { if (window.navigator.msSaveBlob) { var blob = base64ToBlob(base64data); window.navigator.msSaveBlob(blob, filename); return false } var alink = document.createElement("a"); if (window.URL.createObjectURL) { var blob = base64ToBlob(base64data); var blobUrl = window.URL.createObjectURL(blob); alink.href = blobUrl; alink.download = fileName; alink.click(); return } if (alink.download === "") { alink.href = base64data; alink.download = fileName; alink.click(); return } }; var base64ToBlob = function (base64Data) { var arr = base64Data.split(","), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n); while (n--) { u8arr[n] = bstr.charCodeAt(n) } return new Blob([u8arr], { type: mime }) }; return { exportXLS: exportXLS, exportCSV: exportCSV } }()); if (typeof define === "function" && define.amd) { define(function () { return JSONTOEXCEL }) } else { if (typeof exports !== "undefined") { if (typeof module !== "undefined" && module.exports) { exports = module.exports = JSONTOEXCEL } exports.JSONTOEXCEL = JSONTOEXCEL } else { global.JSONTOEXCEL = JSONTOEXCEL } } })(this);</script>
+  <script>
+      /** @Author: changge* @Date: 2017-08-15 11:07:05* @Last Modified by: changge* @Last Modified time: 2018-01-22 17:49:31*/ (function (
+        global
+      ) {
+      var JSONTOEXCEL = (function () {
+        var jsonToXLS = (function () {
+          var xlsTemp =
+            '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta name=ProgId content=Excel.Sheet> <meta name=Generator content="Microsoft Excel 11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>${table}</table></body></html>';
+          return function (dataSource, columns) {
+            var xlsData = "",
+              values = [];
+            xlsData += "<thead>";
+            columns.forEach(function (item) {
+              xlsData += "<th>" + item.title + "</th>";
+              if (item.computed && typeof item.computed === "function") {
+                values.push(item.computed);
+              } else {
+                if (item.dataIndex && typeof item.dataIndex === "string") {
+                  values.push(item.dataIndex);
+                } else {
+                  values.push(null);
+                }
+              }
+            });
+            xlsData += "</thead>";
+            xlsData += "<tbody>";
+            dataSource.forEach(function (item) {
+              xlsData += "<tr>";
+              values.forEach(function (key) {
+                xlsData += "<td>";
+                if (typeof key === "string") {
+                  xlsData += item[key];
+                } else {
+                  if (typeof key === "function") {
+                    xlsData += key(item) || "";
+                  } else {
+                    xlsData += "";
+                  }
+                }
+                xlsData += "</td>";
+              });
+              xlsData += "</tr>";
+            });
+            xlsData += "</tbody>";
+            return xlsTemp.replace("${table}", xlsData);
+          };
+        })();
+        var jsonToCSV = function (dataSource, columns) {
+          var csvData = "",
+            values = [];
+          columns.forEach(function (item) {
+            if (item.computed && typeof item.computed === "function") {
+              values.push(item.computed);
+            } else {
+              if (item.dataIndex && typeof item.dataIndex === "string") {
+                values.push(item.dataIndex);
+              } else {
+                values.push(null);
+              }
+            }
+          });
+          dataSource.forEach(function (item) {
+            values.forEach(function (key) {
+              if (typeof key === "string") {
+                csvData += item[key];
+              } else {
+                if (typeof key === "function") {
+                  csvData += key(item) || "";
+                } else {
+                  csvData += "";
+                }
+              }
+              csvData += ",";
+            });
+            csvData = csvData.slice(0, csvData.length - 1);
+            csvData += "\r\n";
+          });
+          return csvData;
+        };
+        var base64 = function (s) {
+          return window.btoa(window.unescape(encodeURIComponent(s)));
+        };
+        var exportXLS = function (dataSource, columns, fileName) {
+          var XLSData =
+            "data:application/vnd.ms-excel;base64," +
+            base64(jsonToXLS(dataSource, columns));
+          download(XLSData, fileName);
+        };
+        var exportCSV = function (dataSource, columns, fileName) {
+          var CSVData =
+            "data:application/csv;base64," +
+            base64(jsonToCSV(dataSource, columns));
+          download(CSVData, fileName);
+        };
+        var download = function (base64data, fileName) {
+          if (window.navigator.msSaveBlob) {
+            var blob = base64ToBlob(base64data);
+            window.navigator.msSaveBlob(blob, filename);
+            return false;
+          }
+          var alink = document.createElement("a");
+          if (window.URL.createObjectURL) {
+            var blob = base64ToBlob(base64data);
+            var blobUrl = window.URL.createObjectURL(blob);
+            alink.href = blobUrl;
+            alink.download = fileName;
+            alink.click();
+            return;
+          }
+          if (alink.download === "") {
+            alink.href = base64data;
+            alink.download = fileName;
+            alink.click();
+            return;
+          }
+        };
+        var base64ToBlob = function (base64Data) {
+          var arr = base64Data.split(","),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+          while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          return new Blob([u8arr], { type: mime });
+        };
+        return { exportXLS: exportXLS, exportCSV: exportCSV };
+      })();
+      if (typeof define === "function" && define.amd) {
+        define(function () {
+          return JSONTOEXCEL;
+        });
+      } else {
+        if (typeof exports !== "undefined") {
+          if (typeof module !== "undefined" && module.exports) {
+            exports = module.exports = JSONTOEXCEL;
+          }
+          exports.JSONTOEXCEL = JSONTOEXCEL;
+        } else {
+          global.JSONTOEXCEL = JSONTOEXCEL;
+        }
+      }
+    })(this);
+  </script>
 </head>
 
 <body>
   <div class="x-block">
-    <div data-show="true" class="ant-alert ant-alert-info ant-alert-with-description x-alert"><i class="anticon anticon-info-circle-o ant-alert-icon"></i><span
-        class="ant-alert-message">用途：本页面用于帮助解析银行出入金内容，可自动解析出“備考”，“出入金内容（中文）”，“属性”，“凭证”。 </span><span class="ant-alert-description">
+    <div data-show="true" class="ant-alert ant-alert-info ant-alert-with-description x-alert">
+      <i class="anticon anticon-info-circle-o ant-alert-icon"></i>
+      <span
+        class="ant-alert-message">用途：本页面用于帮助解析银行出入金内容，可自动解析出“備考”，“出入金内容（中文）”，“属性”，“凭证”。 </span><span
+        class="ant-alert-description">
         使用方法：
         <ul>
-          <li>① 把从银行下载下来的 Excel 文件打开，复制“入出金先内容”列的内容。
+          <li>
+            ① 把从银行下载下来的 Excel 文件打开，复制“会社名”、“入出金(円)”、“入出金先内容”列的内容。
             <ul>
-              <li>注意：不同银行对“入出金先内容”的称呼不同，我们内部统称为“入出金先内容”。</li>
+              <li>
+                注意：不同银行对“入出金先内容”的称呼不同，我们内部统称为“入出金先内容”。
+              </li>
               <li>例如：</li>
               <li>
                 <table>
@@ -328,62 +484,152 @@
               </li>
             </ul>
           </li>
-          <li>② 粘贴进本页面以下方框中。 </li>
+          <li>② 粘贴进本页面以下方框中。</li>
           <li>③ 点击“导出 Excel”</li>
         </ul>
-      </span></div>
-    <button type="button" class="ant-btn ant-btn-primary x-button" id="J_Cal"><span>导出 Excel</span></button>
-    <textarea rows="20" class="ant-input x-input" name="a" id="a" placeholder="粘贴整一列到这里"></textarea>
-    <textarea style="display: none;margin-top: 20px;" rows="20" class="ant-input x-input" name="b" id="b" placeholder="粘贴整一列到这里">
-アメックス	クレジットカード決済部分への返金	还信用卡的支出	办公支出	要
-アメリカンエキスフ゜レス	クレジットカード決済部分への返金	还信用卡的支出	办公支出	要
-ラクテン（カ　フ゛ツリユウ　ヘ゛ンサイ	庫内事故の弁済金	赔偿金	其他收入	要
-ラクテン（カ　フ゛ツリユウ　タ゛イヒ゛キ	代引き売上	货到付款销售额进账	销售额进账	要
-ヤフ－シヨツピングコウザユウコウセイカクニン	口座確認	确认银行账户	办公支出	要
-ワイエスシ－エクスフ゜レス	コンテナ通関税金など	关税消费税等	税务支出	要
-ク゛リ－ンホ゛ツクス	倉庫利用料	仓储物流费用	仓储物流费用	要
-ラクテンカフ゛シキカ゛イシヤ	楽天システム利用料	乐天系统使用费	平台费用	要
-ＸＵ　ＹＡＮＲＵ	役員報酬	法人代表报酬	人员工资	不要
-1898582　徐　燕如	役員報酬	法人代表报酬	人员工资	不要
-カナムロ　テルヒコ	役員報酬	法人代表报酬	人员工资	不要
-ニシムラ　シンコ゛	役員報酬	法人代表报酬	人员工资	不要
-ｼﾔｶｲﾎｹﾝﾘﾖｳ	社会保险料	保险费	办公支出	不要
-家賃	美羽からの家賃	美羽归还给羽梦的房租	办公支出	要
-ナカムラカイケイシ゛ムシヨ	税理士先生報酬	税理士工资	人员工资	要
-タケタ゛ツヨシセ゛イリシシ゛ムシヨ	税理士先生報酬	税理士工资	人员工资	要
-1164484　タニガワ　エイイチ	給料	人员工资	人员工资	不要
-1164484　タニカ゛ワ　エイイチ	給料	人员工资	人员工资	不要
-（カ）シ゛エ－シ－ヒ゛－	クレジットカード決済部分への返金	信用卡还款	办公支出	要
-ﾌﾘｺﾐﾃｽｳﾘﾖｳ	手数料	手续费	办公支出	要
-振込手数料	手数料	手续费	办公支出	要
-ﾔﾁﾝ	事務所家賃	事务所租金	办公支出	不要
-ＳＭＢＣ（ＮＩヤチン	事務所家賃	事务所租金	办公支出	不要
-タ゛フ゛ルケイ	事務所家賃	事务所租金	办公支出	不要
-テクニカルノア	国際宅配便税金など	国际快递的关税消费税	税务支出	要
-カイガイソウキン	海外送金（親会社へ仕入れ代金の送金）	向胜利汇钱	支付货款	不要
-ラクテンヘ゜イ　イチハ゛	楽天pay売上	楽天pay销售额进账	销售额进账	要
-シラトリセイメンシヨ	羽毛布団リフォーム代	羽绒被翻新费用	办公支出	要
-ヤフ－　ヒ゛シ゛ネスサ－ヒ゛ス	yahoo売上	yahoo销售额进账	销售额进账	要
-振込 バリューコマース（カ	yahoo広告費	yahoo广告费	广告费	要
-カ）ペイジエント	wowma売上入金2WO	wowma销售额进账	销售额进账	要
-ｴ-ﾕ-ｺﾏ-ｽｱﾝﾄﾞﾗｲﾌ(ｶﾌﾘｺﾐ	wowma売上入金1WO	wowma销售额进账	销售额进账	要
-ｶ)ﾍﾟｲｼﾞｴﾝﾄﾌﾘｺﾐ	wowma売上入金1WO	wowma销售额进账	销售额进账	要
-ＤＦ．ＡＵコマ－スアント	wowmaシステム利用料3WO	wowma系统使用费	平台费用	要
-ｺｳｻﾞﾌﾘｶｴ DF.AUｺﾏ-ｽｱﾝ	wowmaシステム利用料1WO	wowma系统使用费	平台费用	要
-ジ－エムオ－イプシロン（カ	makeshop売上1MA	makeshop销售额	销售额进账	要
-シ゛－エムオ－メイクシヨツフ゜（カ	makeshop売上1MA	makeshop销售额	销售额进账	要
-7018655　ＧＭＯメイクショップ	makeshop広告費	makeshop广告费	平台费用	要
-ｲﾌﾟｼﾛﾝ	makeshop利用料	makeshop平台使用费	平台费用	要
-ﾗｸﾃﾝﾓﾊﾞｲ	IP電話料金	IP电话的话费	办公支出	要
-アマゾンジヤパンゴウドウガイシヤ	アマゾン売上3AM	amazon销售额进账3AM	销售额进账	要
-"ｱﾏｿﾞﾝｼﾞﾔﾊﾟﾝｺﾞｳﾄﾞｳｶﾞｲ
-ﾌﾘｺﾐ"	アマゾン売上2AM	amazon销售额进账2AM	销售额进账	要
-ﾌﾂｳﾖｷﾝ ﾘｿｸ	利息	利息	利息	不要
-ｴ-ﾕ-ｺﾏ-ｽｱﾝﾄﾞﾗｲﾌ	wowma売上入金	wowma销售额进账	销售额进账	要
-ﾍﾟｲｼﾞｴﾝﾄ ﾌﾘｺﾐ	wowma売上入金	wowma销售额进账	销售额进账	要
+      </span>
+    </div>
+    <button type="button" class="ant-btn ant-btn-primary x-button" id="J_Cal">
+      <span>导出 Excel</span>
+    </button>
+<textarea rows="20" class="ant-input x-input" name="a" id="a" placeholder="粘贴整份内容到这里">
+</textarea>
+<div id="b-title" style="display: none;margin-top:20px" data-show="true" class="ant-alert ant-alert-info ant-alert-with-description x-alert">
+  <i class="anticon anticon-info-circle-o ant-alert-icon"></i>
+  <span
+    class="ant-alert-message">入出金替换规则👇，如有更新可直接修改
+  </span>
+</div>
+<textarea style="display: none; margin-top: 20px" rows="20" class="ant-input x-input" name="b" id="b"
+      placeholder="粘贴整一列到这里">
+      アメックス	クレジットカード決済部分への返金	还信用卡的支出	办公支出	要
+      アメリカンエキスフ゜レス	クレジットカード決済部分への返金	还信用卡的支出	办公支出	要
+      ラクテン（カ　フ゛ツリユウ　ヘ゛ンサイ	庫内事故の弁済金	赔偿金	其他收入	要
+      ラクテン（カ　フ゛ツリユウ　タ゛イヒ゛キ	代引き売上	货到付款销售额进账	销售额进账	要
+      ヤフ－シヨツピングコウザユウコウセイカクニン	口座確認	确认银行账户	办公支出	要
+      ワイエスシ－エクスフ゜レス	コンテナ通関税金など	关税消费税等	税务支出	要
+      ク゛リ－ンホ゛ツクス	倉庫利用料	仓储物流费用	仓储物流费用	要
+      ラクテンカフ゛シキカ゛イシヤ	楽天システム利用料	乐天系统使用费	平台费用	要
+      ＸＵ　ＹＡＮＲＵ	役員報酬	法人代表报酬	人员工资	不要
+      1898582　徐　燕如	役員報酬	法人代表报酬	人员工资	不要
+      カナムロ　テルヒコ	役員報酬	法人代表报酬	人员工资	不要
+      ニシムラ　シンコ゛	役員報酬	法人代表报酬	人员工资	不要
+      ｼﾔｶｲﾎｹﾝﾘﾖｳ	社会保险料	保险费	办公支出	不要
+      家賃	美羽からの家賃	美羽归还给羽梦的房租	办公支出	要
+      ナカムラカイケイシ゛ムシヨ	税理士先生報酬	税理士工资	人员工资	要
+      タケタ゛ツヨシセ゛イリシシ゛ムシヨ	税理士先生報酬	税理士工资	人员工资	要
+      1164484　タニガワ　エイイチ	給料	人员工资	人员工资	不要
+      1164484　タニカ゛ワ　エイイチ	給料	人员工资	人员工资	不要
+      （カ）シ゛エ－シ－ヒ゛－	クレジットカード決済部分への返金	信用卡还款	办公支出	要
+      ﾌﾘｺﾐﾃｽｳﾘﾖｳ	手数料	手续费	办公支出	要
+      振込手数料	手数料	手续费	办公支出	要
+      ﾔﾁﾝ	事務所家賃	事务所租金	办公支出	不要
+      ＳＭＢＣ（ＮＩヤチン	事務所家賃	事务所租金	办公支出	不要
+      タ゛フ゛ルケイ	事務所家賃	事务所租金	办公支出	不要
+      テクニカルノア	国際宅配便税金など	国际快递的关税消费税	税务支出	要
+      カイガイソウキン	海外送金（親会社へ仕入れ代金の送金）	向胜利汇钱	支付货款	不要
+      ラクテンヘ゜イ　イチハ゛	楽天pay売上	楽天pay销售额进账	销售额进账	要
+      シラトリセイメンシヨ	羽毛布団リフォーム代	羽绒被翻新费用	办公支出	要
+      ヤフ－　ヒ゛シ゛ネスサ－ヒ゛ス	yahoo売上	yahoo销售额进账	销售额进账	要
+      振込 バリューコマース（カ	yahoo広告費	yahoo广告费	广告费	要
+      カ）ペイジエント	wowma売上入金2WO	wowma销售额进账	销售额进账	要
+      ｴ-ﾕ-ｺﾏ-ｽｱﾝﾄﾞﾗｲﾌ(ｶﾌﾘｺﾐ	wowma売上入金1WO	wowma销售额进账	销售额进账	要
+      ｶ)ﾍﾟｲｼﾞｴﾝﾄﾌﾘｺﾐ	wowma売上入金1WO	wowma销售额进账	销售额进账	要
+      ＤＦ．ＡＵコマ－スアント	wowmaシステム利用料3WO	wowma系统使用费	平台费用	要
+      ｺｳｻﾞﾌﾘｶｴ DF.AUｺﾏ-ｽｱﾝ	wowmaシステム利用料1WO	wowma系统使用费	平台费用	要
+      ジ－エムオ－イプシロン（カ	makeshop売上1MA	makeshop销售额	销售额进账	要
+      シ゛－エムオ－メイクシヨツフ゜（カ	makeshop売上1MA	makeshop销售额	销售额进账	要
+      7018655　ＧＭＯメイクショップ	makeshop広告費	makeshop广告费	平台费用	要
+      ｲﾌﾟｼﾛﾝ	makeshop利用料	makeshop平台使用费	平台费用	要
+      ﾗｸﾃﾝﾓﾊﾞｲ	IP電話料金	IP电话的话费	办公支出	要
+      アマゾンジヤパンゴウドウガイシヤ	アマゾン売上3AM	amazon销售额进账3AM	销售额进账	要
+      "ｱﾏｿﾞﾝｼﾞﾔﾊﾟﾝｺﾞｳﾄﾞｳｶﾞｲ
+      ﾌﾘｺﾐ"	アマゾン売上2AM	amazon销售额进账2AM	销售额进账	要
+      ﾌﾂｳﾖｷﾝ ﾘｿｸ	利息	利息	利息	不要
+      ｴ-ﾕ-ｺﾏ-ｽｱﾝﾄﾞﾗｲﾌ	wowma売上入金	wowma销售额进账	销售额进账	要
+      ﾍﾟｲｼﾞｴﾝﾄ ﾌﾘｺﾐ	wowma売上入金	wowma销售额进账	销售额进账	要  
 </textarea>
   </div>
-  <script>if (~location.search.indexOf('debug')) { document.getElementById('b').style.display = "block"; }; document.getElementById('a').select(); document.getElementById('J_Cal').addEventListener('click', function (ev) { const b = document.getElementById('b'); let map = []; b.value.trim().split('\n').forEach(item => { const s = '	'; const itemMap = item.trim().split(s); map.push({/*入出金先内容的 keyword*/keywords: itemMap[0] ? itemMap[0].trim().split(',') : [],/*属性*/type: itemMap[1] || '',/*备注（中文）*/type_cn: itemMap[2] || '',/*備考（日本語）*/group: itemMap[3] || '',/*凭证*/certificate: itemMap[4] || '' }); }); const a = document.getElementById('a'); const aMap = a.value.trim().split('\n'); const getType = function (name) { let item = { type: '#N/A', type_cn: '#N/A', group: '#N/A', certificate: '#N/A' }; map.forEach((m) => { m.keywords.forEach(e => { if (name.replace(/\s+/g, ' ').indexOf(e.replace(/\s+/g, ' ')) > -1) { item = m; } }) }); return item; }; const dataSource = aMap.map((item) => { const matched = getType(item); return { name: item, type: matched.type, type_cn: matched.type_cn, group: matched.group, certificate: matched.certificate } }); const columns = [{ title: '入出金先内容', dataIndex: 'name' }, { title: '備考', dataIndex: 'type', }, { title: '出入金内容（中文）', dataIndex: 'type_cn' }, { title: '属性', dataIndex: 'group' }, { title: '凭证', dataIndex: 'certificate' }]; JSONTOEXCEL.exportXLS(dataSource, columns, 'export.xls'); })</script>
+  <script>
+    if (~location.search.indexOf("debug")) {
+      document.getElementById("b-title").style.display = "block";
+      document.getElementById("b").style.display = "block";
+    }
+    document.getElementById("a").select();
+    const s = "	";
+    document.getElementById("J_Cal").addEventListener("click", function (ev) {
+      debugger;
+      const b = document.getElementById("b");
+      let map = [];
+      b.value
+        .trim()
+        .split("\n")
+        .forEach((item) => {
+          const itemMap = item.trim().split(s);
+          map.push({
+              /*入出金先内容的 keyword*/ keywords: itemMap[0]
+              ? itemMap[0].trim().split("&&")
+              : [],
+              /*属性*/ type: itemMap[1] || "",
+              /*备注（中文）*/ type_cn: itemMap[2] || "",
+              /*備考（日本語）*/ group: itemMap[3] || "",
+              /*凭证*/ certificate: itemMap[4] || "",
+          });
+        });
+      const a = document.getElementById("a");
+      const aMap = a.value.trim().split("\n");
+      const getType = function (typeName) {
+        const nameArr = typeName.split(s);
+        const [company, cost, name] = nameArr;
+        let item = {
+          name,
+          company,
+          type: "#N/A",
+          cost,
+          type_cn: "#N/A",
+          group: "#N/A",
+          certificate: "#N/A",
+        };
+        map.forEach((m) => {
+          if (
+            nameArr[2].replace(/\s+/g, " ").indexOf(m.keywords[0].replace(/\s+/g, " ")) > -1
+            &&
+            (!m.keywords[1] || ((m.keywords[1] == 'ANY')))
+            &&
+            (!m.keywords[2] || ((m.keywords[2] == '<0' && cost <0) || (m.keywords[2] == '>0' && cost > 0) || (m.keywords[2] == cost)))
+          ) {
+            item = m;
+            item.company = company;
+            item.cost = cost;
+            item.name = name;
+          }
+        });
+        return item;
+      };
+      const dataSource = aMap.map((item) => {
+        const matched = getType(item);
+        return {
+          name: matched.name,
+          type: matched.type,
+          company: matched.company,
+          cost: matched.cost,
+          type_cn: matched.type_cn,
+          group: matched.group,
+          certificate: matched.certificate,
+        };
+      });
+      const columns = [
+        { title: "会社名", dataIndex: "company" },
+        { title: "入出金(円)", dataIndex: "cost" },
+        { title: "入出金先内容", dataIndex: "name" },
+        { title: "備考", dataIndex: "type" },
+        { title: "出入金内容（中文）", dataIndex: "type_cn" },
+        { title: "属性", dataIndex: "group" },
+        { title: "凭证", dataIndex: "certificate" },
+      ];
+      JSONTOEXCEL.exportXLS(dataSource, columns, "入出金解析.xls");
+    });
+  </script>
 </body>
 
 </html>
