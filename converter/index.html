@@ -599,9 +599,9 @@
         };
         map.forEach((m) => {
           if (
-            nameArr[2].replace(/\s+/g, " ").indexOf(m.keywords[0].replace(/\s+/g, " ")) > -1
+            name.replace(/\s+/g, " ").indexOf(m.keywords[0].replace(/\s+/g, " ")) > -1
             &&
-            (!m.keywords[1] || ((m.keywords[1] == 'ANY') || (m.keywords[1] == company)))
+            (!m.keywords[1] || ((m.keywords[1] == 'ANY') || (company.indexOf(m.keywords[1]) > -1)))
             &&
             (!m.keywords[2] || ((m.keywords[2] == 'ANY') || (m.keywords[2] == '<0' && cost <0) || (m.keywords[2] == '>0' && cost > 0) || (m.keywords[2] == cost)))
           ) {
