@@ -609,8 +609,6 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
           company,
           type: "#N/A",
           cost,
-          cost_in: '',
-          cost_out: '',
           type_cn: "#N/A",
           group: "#N/A",
           certificate: "#N/A",
@@ -629,10 +627,12 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
             
             if(cost > 0){
               item.cost_in = cost;
+              item.cost_out = '';
             }
             
             if(cost < 0){
               item.cost_out = cost;  
+              item.cost_in = '';
             }
             item.name = name;
           }
