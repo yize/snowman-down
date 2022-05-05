@@ -595,7 +595,16 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
       const aMap = a.value.trim().split("\n");
       const getType = function (typeName) {
         const nameArr = typeName.split(s);
-        const [company, cost, name] = nameArr;
+        let [company, cost, name] = nameArr;
+        
+        if(cost != 'ANY'){
+          if(cost.indexOf(',') > -1){
+            cost = +cost.replace(/,/ig,'')
+          } else {
+            cost = +cost
+          }
+        }
+        
         let item = {
           name,
           company,
@@ -607,7 +616,7 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
         };
         map.forEach((m) => {
           if (
-            name.replace(/\s+/g, " ").indexOf(m.keywords[0].replace(/\s+/g, " ")) > -1
+            name.replace(/\s+/g, ' ').indexOf(m.keywords[0].replace(/\s+/g, ' ')) > -1
             &&
             (!m.keywords[1] || ((m.keywords[1] == 'ANY') || (company.indexOf(m.keywords[1]) > -1)))
             &&
