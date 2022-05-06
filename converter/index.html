@@ -611,7 +611,7 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
           company,
           type: "#N/A",
           cost,
-          date,
+          date: dayjs(date).set('hour',12).format('YYYY-MM-DD HH:mm:ss'),
           cost_in: (cost > 0) ? cost:'',
           cost_out: (cost < 0) ? cost:'',
           type_cn: "#N/A",
