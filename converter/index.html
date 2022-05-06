@@ -645,9 +645,10 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
         });
         return item;
       };
-      const dataSource = aMap.map((item) => {
+      const dataSource = aMap.map((item,i) => {
         const matched = getType(item);
         return {
+          dataId: i+1,
           name: matched.name,
           date: matched.date,
           type: matched.type,
@@ -661,6 +662,7 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
         };
       });
       const columns = [
+        { title: "行号", dataIndex: "dataId" },
         { title: "会社名", dataIndex: "company" },
         { title: "新取引日", dataIndex: "date" },
         { title: "入出金(円)", dataIndex: "cost" },
