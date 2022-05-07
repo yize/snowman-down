@@ -648,9 +648,8 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
       const dataSource = aMap.map((item,i) => {
         const matched = getType(item);
         return {
-          dataId: i+1,
           name: matched.name,
-          date: matched.date,
+          date: dayjs(matched.date).set('minute', i).format('YYYY-MM-DD HH:mm:ss'),
           type: matched.type,
           company: matched.company,
           cost: matched.cost,
