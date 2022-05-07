@@ -663,15 +663,15 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
       const columns = [
         { title: "行号", dataIndex: "dataId" },
         { title: "会社名", dataIndex: "company" },
-        { title: "新取引日", dataIndex: "date" },
+        { title: "新取引日(时分)", dataIndex: "date" },
         { title: "入出金(円)", dataIndex: "cost" },
         { title: "入金(円)", dataIndex: "cost_in" },
         { title: "出金(円)", dataIndex: "cost_out" },
         { title: "入出金先内容", dataIndex: "name" },
         { title: "備考", dataIndex: "type" },
         { title: "出入金内容（中文）", dataIndex: "type_cn" },
-        { title: "属性", dataIndex: "group" },
-        { title: "凭证", dataIndex: "certificate" },
+        { title: "属性(中文)", dataIndex: "group" },
+        { title: "凭证需求", dataIndex: "certificate" },
       ];
       JSONTOEXCEL.exportXLS(dataSource, columns, "入出金解析.xls");
     });
