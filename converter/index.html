@@ -568,112 +568,112 @@ AUｺﾏ-ｽ&&ANY&&<0	wowmaシステム利用料1WO	wowma系统使用费	平台�
   </div>
   <script>
     if (~location.search.indexOf("debug")) {
-      document.getElementById("b-title").style.display = "block";
-      document.getElementById("b").style.display = "block";
-    }
-    document.getElementById("a").select();
-    const s = "	";
+        document.getElementById("b-title").style.display = "block";
+        document.getElementById("b").style.display = "block";
+      }
+      document.getElementById("a").select();
+      const s = "	";
 
-    document.getElementById("J_Cal").addEventListener("click", function (ev) {
-      const b = document.getElementById("b");
-      let map = [];
-      b.value
-        .trim()
-        .split("\n")
-        .forEach((item) => {
-          const itemMap = item.trim().split(s);
-          map.push({
+      document.getElementById("J_Cal").addEventListener("click", function (ev) {
+        const b = document.getElementById("b");
+        let map = [];
+        b.value
+          .trim()
+          .split("\n")
+          .forEach((item) => {
+            const itemMap = item.trim().split(s);
+            map.push({
               /*入出金先内容的 keyword*/ keywords: itemMap[0]
-              ? itemMap[0].trim().split("&&")
-              : [],
+                ? itemMap[0].trim().split("&&")
+                : [],
               /*属性*/ type: itemMap[1] || "",
               /*备注（中文）*/ type_cn: itemMap[2] || "",
               /*備考（日本語）*/ group: itemMap[3] || "",
               /*凭证*/ certificate: itemMap[4] || "",
+            });
           });
-        });
-      const a = document.getElementById("a");
-      const aMap = a.value.trim().split("\n");
-      const getType = function (typeName) {
-        const nameArr = typeName.split(s);
-        let [company, date, cost, name] = nameArr;
-        
-        if(cost != 'ANY'){
-          if(cost.indexOf(',') > -1){
-            cost = +cost.replace(/,/ig,'')
-          } else {
-            cost = +cost
-          }
-        }
-        
-        let item = {
-          name,
-          company,
-          type: "#N/A",
-          cost,
-          date: dayjs(date).set('hour',8).format('YYYY-MM-DD HH:mm:ss'),
-          cost_in: (cost > 0) ? cost:'',
-          cost_out: (cost < 0) ? cost:'',
-          type_cn: "#N/A",
-          group: "#N/A",
-          certificate: "#N/A",
-        };
-        map.forEach((m) => {
-          if (
-            name.replace(/\s+/g, ' ').indexOf(m.keywords[0].replace(/\s+/g, ' ')) > -1
-            &&
-            (!m.keywords[1] || ((m.keywords[1] == 'ANY') || (company.indexOf(m.keywords[1]) > -1)))
-            &&
-            (!m.keywords[2] || ((m.keywords[2] == 'ANY') || (m.keywords[2] == '<0' && cost <0) || (m.keywords[2] == '>0' && cost > 0) || (m.keywords[2] == cost)))
-          ) {
-            item = m;
-            item.company = company;
-            item.cost = cost;
-            item.date = dayjs(date).set('hour',8).format('YYYY-MM-DD HH:mm:ss')
-            
-            if(cost > 0){
-              item.cost_in = cost;
-              item.cost_out = '';
+        const a = document.getElementById("a");
+        const aMap = a.value.trim().split("\n");
+        const getType = function (typeName) {
+          const nameArr = typeName.split(s);
+          let [company, date, cost, name] = nameArr;
+
+          if (cost != 'ANY') {
+            if (cost.indexOf(',') > -1) {
+              cost = +cost.replace(/,/ig, '')
+            } else {
+              cost = +cost
             }
-            
-            if(cost < 0){
-              item.cost_out = cost;  
-              item.cost_in = '';
-            }
-            item.name = name;
           }
-        });
-        return item;
-      };
-      const dataSource = aMap.map((item,i) => {
-        const matched = getType(item);
-        return {
-          name: matched.name,
-          date: dayjs(matched.date).set('minute', i).format('YYYY-MM-DD HH:mm:ss'),
-          type: matched.type,
-          company: matched.company,
-          cost: matched.cost,
-          cost_in: matched.cost_in,
-          cost_out: matched.cost_out,
-          type_cn: matched.type_cn,
-          group: matched.group,
-          certificate: matched.certificate,
+
+          let item = {
+            name,
+            company,
+            type: "#N/A",
+            cost,
+            date: dayjs(date).set('hour', 10).format('YYYY-MM-DD HH:mm:ss'),
+            cost_in: (cost > 0) ? cost : '',
+            cost_out: (cost < 0) ? cost : '',
+            type_cn: "#N/A",
+            group: "#N/A",
+            certificate: "#N/A",
+          };
+          map.forEach((m) => {
+            if (
+              name.replace(/\s+/g, ' ').indexOf(m.keywords[0].replace(/\s+/g, ' ')) > -1
+              &&
+              (!m.keywords[1] || ((m.keywords[1] == 'ANY') || (company.indexOf(m.keywords[1]) > -1)))
+              &&
+              (!m.keywords[2] || ((m.keywords[2] == 'ANY') || (m.keywords[2] == '<0' && cost < 0) || (m.keywords[2] == '>0' && cost > 0) || (m.keywords[2] == cost)))
+            ) {
+              item = m;
+              item.company = company;
+              item.cost = cost;
+              item.date = dayjs(date).set('hour', 10).format('YYYY-MM-DD HH:mm:ss')
+
+              if (cost > 0) {
+                item.cost_in = cost;
+                item.cost_out = '';
+              }
+
+              if (cost < 0) {
+                item.cost_out = cost;
+                item.cost_in = '';
+              }
+              item.name = name;
+            }
+          });
+          return item;
         };
+        const dataSource = aMap.map((item, i) => {
+          const matched = getType(item);
+          return {
+            name: matched.name,
+            date: dayjs(matched.date).set('minute', i).format('YYYY-MM-DD HH:mm:ss'),
+            type: matched.type,
+            company: matched.company,
+            cost: matched.cost,
+            cost_in: matched.cost_in,
+            cost_out: matched.cost_out,
+            type_cn: matched.type_cn,
+            group: matched.group,
+            certificate: matched.certificate,
+          };
+        });
+        const columns = [
+          { title: "会社名", dataIndex: "company" },
+          { title: "新取引日(时分)", dataIndex: "date" },
+          { title: "入出金(円)", dataIndex: "cost" },
+          { title: "入金(円)", dataIndex: "cost_in" },
+          { title: "出金(円)", dataIndex: "cost_out" },
+          { title: "入出金先内容", dataIndex: "name" },
+          { title: "備考", dataIndex: "type" },
+          { title: "出入金内容（中文）", dataIndex: "type_cn" },
+          { title: "属性(中文)", dataIndex: "group" },
+          { title: "凭证需求", dataIndex: "certificate" },
+        ];
+        JSONTOEXCEL.exportXLS(dataSource, columns, "入出金解析.xls");
       });
-      const columns = [
-        { title: "会社名", dataIndex: "company" },
-        { title: "新取引日(时分)", dataIndex: "date" },
-        { title: "入出金(円)", dataIndex: "cost" },
-        { title: "入金(円)", dataIndex: "cost_in" },
-        { title: "出金(円)", dataIndex: "cost_out" },
-        { title: "入出金先内容", dataIndex: "name" },
-        { title: "備考", dataIndex: "type" },
-        { title: "出入金内容（中文）", dataIndex: "type_cn" },
-        { title: "属性(中文)", dataIndex: "group" },
-        { title: "凭证需求", dataIndex: "certificate" },
-      ];
-      JSONTOEXCEL.exportXLS(dataSource, columns, "入出金解析.xls");
-    });
   </script>
 </body>
 
